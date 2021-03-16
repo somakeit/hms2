@@ -1,0 +1,22 @@
+@import 'variables';
+
+$primary: #bc00ea;
+$link-color: #f57938;
+$link-hover-color: black;
+
+$tool-booking-maintenance: goldenrod;
+
+$theme-colors: (
+  "hackspace-gray": $hackspace-gray,
+  "booking-normal": $tool-booking-normal,
+  "booking-induction": $tool-booking-induction,
+  "booking-maintenance": $tool-booking-maintenance,
+  "indigo":     $indigo,
+  "pink":       $pink,
+  "red":        $red,
+  "orange":     $orange,
+  "yellow":     $yellow,
+  "green":      $green,
+  "teal":       $teal,
+  "cyan":       $cyan,
+);

@@ -1,6 +1,6 @@
 const mix = require('laravel-mix');
 const path = require('path');
-const { exec } = require('child_process');
+const {exec} = require('child_process');
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 require('laravel-mix-bundle-analyzer');
 
@@ -38,7 +38,8 @@ mix.extend('ziggy', new class {
                     console.log(`${path} changed...`);
                     command();
                 });
-        };
+        }
+        ;
     }
 }());
 
@@ -67,21 +68,22 @@ mix.sourceMaps()
     })
     .js('resources/js/app.js', 'public/js')
     .vue({
-      extractStyles: 'public/css/vue.css',
-      globalStyles: {
-        scss: [
-          '~bootstrap/scss/functions',
-          '~bootstrap/scss/variables',
-          '~bootstrap/scss/mixins',
-          'resources/sass/_variables.scss',
-        ],
-      }
+        extractStyles: 'public/css/vue.css',
+        globalStyles: {
+            scss: [
+                '~bootstrap/scss/functions',
+                '~bootstrap/scss/variables',
+                '~bootstrap/scss/mixins',
+                process.env.THEME ? `resources/sass/_variables_${process.env.THEME}.scss` : 'resources/sass/_variables.scss',
+            ],
+        }
     })
     .extract()
-    .sass('resources/sass/app.scss', 'public/css')
-    .options({
-    })
-    .version();
+    .sass('resources/sass/app.scss', 'public/css', {
+        additionalData: process.env.THEME ? `@import 'variables_${process.env.THEME}';` : "@import 'variables';",
+    });
+
+mix.version();
 
 if (!mix.inProduction()) {
     mix.bundleAnalyzer({
